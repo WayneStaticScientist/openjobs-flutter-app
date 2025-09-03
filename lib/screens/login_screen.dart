@@ -27,6 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   "OpenJobs",
                   style: TextStyle(
                     fontSize: 36,
+                    color: Get.isDarkMode ? Colors.white : Colors.black,
                     fontFamily: "transit",
                     fontWeight: FontWeight.bold,
                   ),

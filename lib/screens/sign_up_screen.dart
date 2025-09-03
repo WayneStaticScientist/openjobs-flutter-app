@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:openjobs/widgets/buttons/opx_material_button.dart';
 import 'package:openjobs/widgets/input/opx_material_input.dart';
@@ -24,6 +24,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   "OpenJobs",
                   style: TextStyle(
                     fontSize: 36,
+                    color: Get.isDarkMode ? Colors.white : Colors.black,
                     fontFamily: "transit",
                     fontWeight: FontWeight.bold,
                   ),
