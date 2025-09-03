@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:openjobs/screens/main_screen.dart';
 import 'package:openjobs/screens/sign_up_screen.dart';
 import 'package:openjobs/widgets/buttons/opx_colored_button.dart';
 import 'package:openjobs/widgets/buttons/opx_material_button.dart';
@@ -71,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 24),
                 OpxColoredButton(
                   text: "Continue Without Account",
-                  onPressed: () {},
+                  onPressed: () => Get.to(() => MainScreen()),
                 ),
               ],
             ),
