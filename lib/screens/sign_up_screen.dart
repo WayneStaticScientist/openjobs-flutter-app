@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:openjobs/screens/sign_up_screen.dart';
-import 'package:openjobs/widgets/buttons/opx_colored_button.dart';
 import 'package:openjobs/widgets/buttons/opx_material_button.dart';
 import 'package:openjobs/widgets/input/opx_material_input.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
-
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +29,24 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: 24),
+                Row(
+                  children: [
+                    Expanded(
+                      child: OpenXInput(
+                        leadingIcon: Icon(LineAwesomeIcons.user),
+                        hint: "First Name",
+                      ),
+                    ),
+                    const SizedBox(width: 20),
+                    Expanded(
+                      child: OpenXInput(
+                        leadingIcon: Icon(LineAwesomeIcons.user),
+                        hint: "LastName",
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 24),
                 OpenXInput(
                   leadingIcon: Icon(LineAwesomeIcons.envelope),
                   hint: 'Email Address',
@@ -39,21 +54,24 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 24),
                 OpenXInput(
                   leadingIcon: Icon(LineAwesomeIcons.lock_open_solid),
-                  hint: 'Email Address',
+                  hint: 'Password',
                 ),
                 const SizedBox(height: 24),
-                InkWell(child: Text("Forgot Password ?")),
+                OpenXInput(
+                  leadingIcon: Icon(LineAwesomeIcons.lock_open_solid),
+                  hint: 'Confirm Password',
+                ),
                 const SizedBox(height: 24),
-                OpxMaterialButton(text: "Sign In", onPressed: () {}),
+                OpxMaterialButton(text: "Sign Up", onPressed: () {}),
                 const SizedBox(height: 24),
                 InkWell(
-                  onTap: () => Get.to(() => SignUpScreen()),
+                  onTap: () => Get.back(),
                   child: Text.rich(
                     TextSpan(
                       children: [
-                        TextSpan(text: "Dont have account ? "),
+                        TextSpan(text: "Already have account ? "),
                         TextSpan(
-                          text: "Sign Up",
+                          text: "Sign in",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Get.isDarkMode
@@ -64,13 +82,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                   ),
-                ),
-                const SizedBox(height: 24),
-                const Divider(),
-                const SizedBox(height: 24),
-                OpxColoredButton(
-                  text: "Continue Without Account",
-                  onPressed: () {},
                 ),
               ],
             ),

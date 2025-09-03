@@ -9,8 +9,12 @@ final ThemeData lightTheme = ThemeData(
 );
 
 final ThemeData darkTheme = ThemeData(
-  brightness: Brightness.dark,
-  primaryColor: Colors.blueGrey,
+  colorScheme: ColorScheme.fromSeed(
+    seedColor: Colors.orange,
+    brightness: Brightness.dark, // Set the brightness here
+  ),
+  primaryColor: Colors.white,
+  primaryColorDark: Colors.red,
   scaffoldBackgroundColor: Colors.black,
   appBarTheme: const AppBarTheme(color: Colors.blueGrey),
   // Add other properties here

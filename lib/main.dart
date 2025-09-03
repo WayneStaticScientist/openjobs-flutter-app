@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: ThemeMode.system,
+      debugShowCheckedModeBanner: false,
       home: const LoginScreen(),
     );
   }
