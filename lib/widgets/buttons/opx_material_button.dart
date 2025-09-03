@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:openjobs/utils/themer_util.dart';
 
 class OpxMaterialButton extends StatelessWidget {
   final String text;
@@ -19,9 +20,7 @@ class OpxMaterialButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadiusGeometry.circular(10),
         ),
-        backgroundColor: Get.isDarkMode
-            ? Colors.white
-            : Get.theme.colorScheme.primary,
+        backgroundColor: ThemerUtil.getPaint(),
       ),
       child: Text(
         text,

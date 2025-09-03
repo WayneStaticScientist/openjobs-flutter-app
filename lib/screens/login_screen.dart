@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:openjobs/screens/main_screen.dart';
 import 'package:openjobs/screens/sign_up_screen.dart';
+import 'package:openjobs/utils/themer_util.dart';
 import 'package:openjobs/widgets/buttons/opx_colored_button.dart';
 import 'package:openjobs/widgets/buttons/opx_material_button.dart';
 import 'package:openjobs/widgets/input/opx_material_input.dart';
@@ -58,9 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           text: "Sign Up",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Get.isDarkMode
-                                ? Colors.white
-                                : Get.theme.colorScheme.primary,
+                            color: ThemerUtil.getPaint(),
                           ),
                         ),
                       ],

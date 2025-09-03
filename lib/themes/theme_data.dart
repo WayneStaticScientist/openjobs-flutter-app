@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 
 final ThemeData lightTheme = ThemeData(
-  brightness: Brightness.light,
-  primaryColor: Colors.blue,
+  colorScheme: ColorScheme.fromSeed(
+    seedColor: Colors.blueAccent,
+    brightness: Brightness.light, // Set the brightness here
+  ),
   scaffoldBackgroundColor: Colors.white,
-  appBarTheme: const AppBarTheme(color: Colors.blue),
+  appBarTheme: const AppBarTheme(
+    color: Colors.white,
+    iconTheme: IconThemeData(color: Colors.black),
+    titleTextStyle: TextStyle(color: Colors.black),
+  ),
   // Add other properties here
 );
 
