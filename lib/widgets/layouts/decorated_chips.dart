@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:openjobs/utils/color_util.dart';
 
 class OpxChip extends StatelessWidget {
   final String title;
@@ -7,6 +8,10 @@ class OpxChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Chip(label: Text(title), avatar: Icon(icon));
+    return Chip(
+      color: WidgetStateProperty.all<Color?>(ColorUtil.getMedianColor(title)),
+      label: Text(title, style: TextStyle(color: Colors.white)),
+      avatar: Icon(icon, color: Colors.white),
+    );
   }
 }

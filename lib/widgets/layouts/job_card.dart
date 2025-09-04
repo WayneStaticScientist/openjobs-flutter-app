@@ -32,7 +32,7 @@ class JobCard extends StatelessWidget {
                     const SizedBox(width: 16),
                     Expanded(
                       child: SizedBox(
-                        height: 100,
+                        height: 120,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -41,11 +41,20 @@ class JobCard extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Flexible(
-                                  child: Text(
-                                    model.title,
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
+                                  child: ListTile(
+                                    title: Text(
+                                      model.title,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    subtitle: Text(
+                                      "${model.jobCategory} , ${model.jobType}",
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
                                 ),
