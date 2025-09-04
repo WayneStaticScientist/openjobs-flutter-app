@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:openjobs/screens/login_screen.dart';
 import 'package:openjobs/screens/upload_job.dart';
+import 'package:openjobs/services/auth/user_auth.dart';
+import 'package:openjobs/widgets/buttons/opx_material_button.dart';
 import 'package:openjobs/widgets/layouts/item_card.dart';
+import 'package:openjobs/widgets/texts/strong_text.dart';
 
 class UploadNav extends StatefulWidget {
   const UploadNav({super.key});
@@ -14,6 +18,26 @@ class UploadNav extends StatefulWidget {
 class _UploadNavState extends State<UploadNav> {
   @override
   Widget build(BuildContext context) {
+    final userAuth = UserAuth();
+    if (userAuth.firstName == null) {
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.all(30),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              StrongText("You need to be logged in to view this page"),
+              SizedBox(height: 16),
+              OpxMaterialButton(
+                text: "Login",
+                onPressed: () => Get.to(() => LoginScreen()),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListView(

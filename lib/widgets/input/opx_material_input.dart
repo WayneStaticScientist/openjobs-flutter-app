@@ -3,18 +3,26 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:openjobs/utils/themer_util.dart';
 
 class OpenXInput extends StatefulWidget {
-  final Icon leadingIcon;
+  final Icon? leadingIcon;
   final String hint;
+  final int? minLines;
+  final int? maxLines;
   final bool? enabled;
+  final Widget? suffix;
   final bool? passwordField;
+  final TextInputType? keyboardType;
   final FormFieldValidator<String>? validate;
   final TextEditingController? controller;
   const OpenXInput({
     super.key,
-    required this.leadingIcon,
+    this.leadingIcon,
     required this.hint,
     this.controller,
     this.validate,
+    this.keyboardType,
+    this.maxLines,
+    this.suffix,
+    this.minLines,
     this.enabled,
     this.passwordField,
   });
@@ -28,6 +36,9 @@ class _OpenXInputState extends State<OpenXInput> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: widget.keyboardType,
+      maxLines: widget.maxLines,
+      minLines: widget.minLines,
       enabled: widget.enabled ?? true,
       validator: widget.validate,
       controller: widget.controller,
@@ -49,7 +60,7 @@ class _OpenXInputState extends State<OpenXInput> {
                       : LineAwesomeIcons.eye_slash_solid,
                 ),
               )
-            : null,
+            : widget.suffix,
         fillColor: Colors.grey.withAlpha(26),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
