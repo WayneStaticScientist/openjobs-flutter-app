@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:openjobs/controllers/jobs_controller.dart';
 import 'package:openjobs/nav_routers/home_nav_router.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 
@@ -12,6 +13,13 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
+  final _jobsController = JobsController();
+  @override
+  void initState() {
+    super.initState();
+    _jobsController.findJobs();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

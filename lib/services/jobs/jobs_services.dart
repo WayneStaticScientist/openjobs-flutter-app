@@ -16,7 +16,7 @@ class JobsServices {
   }) async {
     try {
       final client = Supabase.instance.client;
-      client.from("jobs").insert({
+      await client.from("jobs").insert({
         "title": title,
         "dueDate": dueDate,
         "jobType": jobType,
@@ -25,6 +25,7 @@ class JobsServices {
         "jobCategory": jobCategory,
         "expectedSalary": expectedSalary,
         "applicationType": applicationType,
+        "applicationData": applicationData,
         "experienceLevel": experienceLevel,
         "prefferedLocation": prefferedLocation,
       });

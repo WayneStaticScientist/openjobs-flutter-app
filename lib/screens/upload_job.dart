@@ -4,6 +4,7 @@ import 'package:openjobs/utils/job_types.dart';
 import 'package:openjobs/utils/toast_marker.dart';
 import 'package:openjobs/widgets/texts/strong_text.dart';
 import 'package:openjobs/services/jobs/jobs_services.dart';
+import 'package:rive_animated_icon/rive_animated_icon.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:openjobs/widgets/input/opx_material_input.dart';
 import 'package:openjobs/widgets/buttons/opx_material_button.dart';
@@ -16,6 +17,7 @@ class UploadJobScreen extends StatefulWidget {
 }
 
 class _UploadJobScreenState extends State<UploadJobScreen> {
+  bool _success = false;
   bool _loading = false;
   final _formKey = GlobalKey<FormState>();
   final _dueDateController = TextEditingController();
@@ -37,130 +39,168 @@ class _UploadJobScreenState extends State<UploadJobScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Job Posting")),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Form(
-          key: _formKey,
-          child: ListView(
-            children: [
-              StrongText("Job Details"),
-              SizedBox(height: 14),
-              Text("Job Title"),
-              OpenXInput(
-                controller: _titleController,
-                validate: (value) =>
-                    value!.trim().isEmpty ? "Title shouldnot be empty" : null,
-                leadingIcon: Icon(LineAwesomeIcons.text_height_solid),
-                hint: "Enter Job Title",
-              ),
-              SizedBox(height: 14),
-              Text("Job Type"),
-              InkWell(
-                onTap: _pickType,
-                child: OpenXInput(
-                  suffix: Icon(LineAwesomeIcons.chevron_circle_down_solid),
-                  controller: _jobTypeController,
-                  enabled: false,
-                  leadingIcon: Icon(LineAwesomeIcons.opencart),
-                  hint: "Job Type",
+      body: _success
+          ? Center(
+              child: Padding(
+                padding: const EdgeInsets.all(30),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    RiveAnimatedIcon(
+                      riveIcon: RiveIcon.like,
+                      width: 50,
+                      height: 50,
+                      color: Colors.green,
+                      strokeWidth: 3,
+                      loopAnimation: true,
+                      onTap: () {},
+                      onHover: (value) {},
+                    ),
+                    SizedBox(height: 16),
+                    StrongText("Upload Success"),
+                    SizedBox(height: 16),
+                    OpxMaterialButton(
+                      text: "Upload Again",
+                      onPressed: () => Get.off(() => UploadJobScreen()),
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(height: 14),
-              Text("Job Category"),
-              InkWell(
-                onTap: _pickCategory,
-                child: OpenXInput(
-                  suffix: Icon(LineAwesomeIcons.chevron_circle_down_solid),
-                  controller: _jobCategoryController,
-                  enabled: false,
-                  leadingIcon: Icon(LineAwesomeIcons.opencart),
-                  hint: "Job Category",
+            )
+          : Padding(
+              padding: const EdgeInsets.all(20),
+              child: Form(
+                key: _formKey,
+                child: ListView(
+                  children: [
+                    StrongText("Job Details"),
+                    SizedBox(height: 14),
+                    Text("Job Title"),
+                    OpenXInput(
+                      controller: _titleController,
+                      validate: (value) => value!.trim().isEmpty
+                          ? "Title shouldnot be empty"
+                          : null,
+                      leadingIcon: Icon(LineAwesomeIcons.text_height_solid),
+                      hint: "Enter Job Title",
+                    ),
+                    SizedBox(height: 14),
+                    Text("Job Type"),
+                    InkWell(
+                      onTap: _pickType,
+                      child: OpenXInput(
+                        suffix: Icon(
+                          LineAwesomeIcons.chevron_circle_down_solid,
+                        ),
+                        controller: _jobTypeController,
+                        enabled: false,
+                        leadingIcon: Icon(LineAwesomeIcons.opencart),
+                        hint: "Job Type",
+                      ),
+                    ),
+                    SizedBox(height: 14),
+                    Text("Job Category"),
+                    InkWell(
+                      onTap: _pickCategory,
+                      child: OpenXInput(
+                        suffix: Icon(
+                          LineAwesomeIcons.chevron_circle_down_solid,
+                        ),
+                        controller: _jobCategoryController,
+                        enabled: false,
+                        leadingIcon: Icon(LineAwesomeIcons.opencart),
+                        hint: "Job Category",
+                      ),
+                    ),
+                    SizedBox(height: 18),
+                    Text("Experience Level"),
+                    OpenXInput(
+                      controller: _experienceLevelController,
+                      leadingIcon: Icon(LineAwesomeIcons.school_solid),
+                      hint: "Experience Level",
+                    ),
+                    SizedBox(height: 14),
+                    Text("Due Date"),
+                    InkWell(
+                      onTap: _pickDate,
+                      child: OpenXInput(
+                        suffix: Icon(
+                          LineAwesomeIcons.chevron_circle_down_solid,
+                        ),
+                        controller: _dueDateController,
+                        enabled: false,
+                        leadingIcon: Icon(LineAwesomeIcons.calendar),
+                        hint: "Due Date",
+                      ),
+                    ),
+                    SizedBox(height: 14),
+                    Text("Preffered Locations(Separate by Commas)"),
+                    OpenXInput(
+                      controller: _prefferedLocationController,
+                      leadingIcon: Icon(LineAwesomeIcons.location_arrow_solid),
+                      hint: "Preffered Locations",
+                    ),
+                    SizedBox(height: 12),
+                    Text("Job Description"),
+                    OpenXInput(
+                      controller: _descriptionController,
+                      validate: (value) => value!.trim().isEmpty
+                          ? "Job description is not empty"
+                          : null,
+                      hint: "Job Description",
+                      minLines: 3,
+                      maxLines: 7,
+                    ),
+                    SizedBox(height: 14),
+                    Text("Job Locations(Separate by Commas)"),
+                    OpenXInput(
+                      controller: _locationController,
+                      leadingIcon: Icon(LineAwesomeIcons.location_arrow_solid),
+                      hint: "Job Location",
+                    ),
+                    SizedBox(height: 14),
+                    Text("Minimum Salary"),
+                    OpenXInput(
+                      controller: _expectedSalaryController,
+                      keyboardType: TextInputType.number,
+                      leadingIcon: Icon(LineAwesomeIcons.money_bill_alt),
+                      hint: "Expected Salary",
+                    ),
+                    SizedBox(height: 14),
+                    Text("Application Type"),
+                    InkWell(
+                      onTap: _pickApplicationType,
+                      child: OpenXInput(
+                        suffix: Icon(
+                          LineAwesomeIcons.chevron_circle_down_solid,
+                        ),
+                        controller: _applicationTypeController,
+                        enabled: false,
+                        leadingIcon: Icon(LineAwesomeIcons.opencart),
+                        hint: "Application Type",
+                      ),
+                    ),
+                    SizedBox(height: 14),
+                    Text("Application ${_applicationTypeController.text} data"),
+                    OpenXInput(
+                      controller: _applicationDataController,
+                      validate: (value) => value!.trim().isEmpty
+                          ? "Application data is required"
+                          : null,
+                      leadingIcon: Icon(LineAwesomeIcons.opencart),
+                      hint: _applicationTypeController.text,
+                    ),
+                    SizedBox(height: 14),
+                    OpxMaterialButton(
+                      loading: _loading,
+                      text: "Upload Listing",
+                      onPressed: _uploadJobData,
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(height: 18),
-              Text("Experience Level"),
-              OpenXInput(
-                controller: _experienceLevelController,
-                leadingIcon: Icon(LineAwesomeIcons.school_solid),
-                hint: "Experience Level",
-              ),
-              SizedBox(height: 14),
-              Text("Due Date"),
-              InkWell(
-                onTap: _pickDate,
-                child: OpenXInput(
-                  suffix: Icon(LineAwesomeIcons.chevron_circle_down_solid),
-                  controller: _dueDateController,
-                  enabled: false,
-                  leadingIcon: Icon(LineAwesomeIcons.calendar),
-                  hint: "Due Date",
-                ),
-              ),
-              SizedBox(height: 14),
-              Text("Preffered Locations(Separate by Commas)"),
-              OpenXInput(
-                controller: _prefferedLocationController,
-                leadingIcon: Icon(LineAwesomeIcons.location_arrow_solid),
-                hint: "Preffered Locations",
-              ),
-              SizedBox(height: 12),
-              Text("Job Description"),
-              OpenXInput(
-                controller: _descriptionController,
-                validate: (value) => value!.trim().isEmpty
-                    ? "Job description is not empty"
-                    : null,
-                hint: "Job Description",
-                minLines: 3,
-                maxLines: 3,
-              ),
-              SizedBox(height: 14),
-              Text("Job Locations(Separate by Commas)"),
-              OpenXInput(
-                controller: _locationController,
-                leadingIcon: Icon(LineAwesomeIcons.location_arrow_solid),
-                hint: "Job Location",
-              ),
-              SizedBox(height: 14),
-              Text("Minimum Salary"),
-              OpenXInput(
-                controller: _expectedSalaryController,
-                keyboardType: TextInputType.number,
-                leadingIcon: Icon(LineAwesomeIcons.money_bill_alt),
-                hint: "Expected Salary",
-              ),
-              SizedBox(height: 14),
-              Text("Application Type"),
-              InkWell(
-                onTap: _pickApplicationType,
-                child: OpenXInput(
-                  suffix: Icon(LineAwesomeIcons.chevron_circle_down_solid),
-                  controller: _applicationTypeController,
-                  enabled: false,
-                  leadingIcon: Icon(LineAwesomeIcons.opencart),
-                  hint: "Application Type",
-                ),
-              ),
-              SizedBox(height: 14),
-              Text("Application ${_applicationTypeController.text} data"),
-              OpenXInput(
-                controller: _applicationDataController,
-                validate: (value) => value!.trim().isEmpty
-                    ? "Application data is required"
-                    : null,
-                leadingIcon: Icon(LineAwesomeIcons.opencart),
-                hint: _applicationTypeController.text,
-              ),
-              SizedBox(height: 14),
-              OpxMaterialButton(
-                loading: _loading,
-                text: "Upload Listing",
-                onPressed: _uploadJobData,
-              ),
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 
@@ -346,6 +386,7 @@ class _UploadJobScreenState extends State<UploadJobScreen> {
     if (!(_formKey.currentState!.validate())) {
       return;
     }
+
     setState(() {
       _loading = true;
     });
@@ -364,8 +405,12 @@ class _UploadJobScreenState extends State<UploadJobScreen> {
         expectedSalary: double.parse(_expectedSalaryController.text),
         applicationData: _applicationDataController.text,
       );
-      ToastMarker.success("Job post uploaded succesfully");
-      Get.back();
+      if (mounted) {
+        ToastMarker.success("Job post uploaded succesfully");
+        setState(() {
+          _success = true;
+        });
+      }
     } catch (e) {
       ToastMarker.error("$e");
     } finally {

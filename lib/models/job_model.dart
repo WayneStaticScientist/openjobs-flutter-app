@@ -1,67 +1,107 @@
 class JobModel {
-  final int level;
   final String? date;
   final String title;
   final String? dueDate;
+  final String jobType;
   final String? location;
-  final String experience;
   final String description;
+  final String jobCategory;
+  final int? expectedSalary;
+  final String experienceLevel;
+  final String applicationData;
   final String applicationType;
-  final String applicationForm;
+  final String? prefferedLocation;
 
   JobModel({
     this.date,
     this.dueDate,
     this.location,
-    required this.level,
+    this.expectedSalary,
     required this.title,
-    required this.experience,
+    this.prefferedLocation,
+    required this.jobType,
+    required this.jobCategory,
     required this.description,
+    required this.applicationData,
+    required this.experienceLevel,
     required this.applicationType,
-    required this.applicationForm,
   });
+  factory JobModel.fromMap(Map<String, dynamic> data) {
+    return JobModel(
+      title: data["title"],
+      dueDate: data["dueDate"],
+      jobType: data["jobType"],
+      location: data["location"],
+      description: data['description'],
+      jobCategory: data['jobCategory'],
+      expectedSalary: data['expectedSalary'],
+      applicationType: data['applicationType'],
+      applicationData: data['applicationData'],
+      experienceLevel: data['experienceLevel'],
+      prefferedLocation: data['prefferedLocation'],
+    );
+  }
 }
 
-List<JobModel> jobList = [
+List<JobModel> dummyJobs = [
   JobModel(
-    level: 1,
-    title: "Software Engineer",
-    experience: "3+ years",
-    description: "We are looking for a software engineer to join our team.",
-    applicationType: "email",
-    applicationForm: "hr@example.com",
+    title: 'Software Engineer',
+    jobType: 'Full-time',
+    jobCategory: 'Technology',
+    description: 'Develop and maintain software applications.',
+    applicationData: 'Apply through our website.',
+    experienceLevel: 'Mid-level',
+    applicationType: 'Online',
+    dueDate: '2024-03-15',
+    location: 'San Francisco, CA',
+    expectedSalary: 120000,
   ),
   JobModel(
-    level: 2,
-    title: "Data Scientist",
-    experience: "5+ years",
-    description: "We are looking for a data scientist to join our team.",
-    applicationType: "form",
-    applicationForm: "https://example.com/form",
+    title: 'Marketing Manager',
+    jobType: 'Full-time',
+    jobCategory: 'Marketing',
+    description: 'Lead marketing campaigns and manage the marketing team.',
+    applicationData: 'Send your resume to hr@example.com',
+    experienceLevel: 'Senior',
+    applicationType: 'Email',
+    dueDate: '2024-03-22',
+    location: 'New York, NY',
+    expectedSalary: 150000,
   ),
   JobModel(
-    level: 3,
-    title: "Product Manager",
-    experience: "7+ years",
-    description: "We are looking for a product manager to join our team.",
-    applicationType: "linkedin",
-    applicationForm: "https://linkedin.com/jobs/12345",
+    title: 'Data Scientist',
+    jobType: 'Contract',
+    jobCategory: 'Data Science',
+    description: 'Analyze data and build machine learning models.',
+    applicationData: 'Apply on LinkedIn.',
+    experienceLevel: 'Mid-level',
+    applicationType: 'LinkedIn',
+    dueDate: '2024-03-01',
+    location: 'Remote',
+    expectedSalary: 130000,
   ),
   JobModel(
-    level: 1,
-    title: "Frontend Developer",
-    experience: "2+ years",
-    description:
-        "We need a skilled frontend developer to build user interfaces.",
-    applicationType: "email",
-    applicationForm: "jobs@company.com",
+    title: 'Sales Representative',
+    jobType: 'Full-time',
+    jobCategory: 'Sales',
+    description: 'Generate leads and close sales deals.',
+    applicationData: 'Call us at 555-123-4567.',
+    experienceLevel: 'Entry-level',
+    applicationType: 'Phone',
+    dueDate: '2024-02-29',
+    location: 'Chicago, IL',
+    expectedSalary: 80000,
   ),
   JobModel(
-    level: 2,
-    title: "Backend Developer",
-    experience: "4+ years",
-    description: "Seeking a backend developer to work on server-side logic.",
-    applicationType: "form",
-    applicationForm: "https://company.com/careers",
+    title: 'Project Manager',
+    jobType: 'Full-time',
+    jobCategory: 'Management',
+    description: 'Oversee projects from start to finish.',
+    applicationData: 'Submit your application via our portal.',
+    experienceLevel: 'Mid-level',
+    applicationType: 'Portal',
+    dueDate: '2024-03-08',
+    location: 'Austin, TX',
+    expectedSalary: 110000,
   ),
 ];
