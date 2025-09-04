@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:openjobs/services/auth/user_auth.dart';
 import 'package:openjobs/utils/job_types.dart';
 import 'package:openjobs/utils/toast_marker.dart';
 import 'package:openjobs/widgets/texts/strong_text.dart';
@@ -29,12 +30,13 @@ class _UploadJobScreenState extends State<UploadJobScreen> {
     text: JobTypes.applicationTypes[0],
   );
   final _titleController = TextEditingController();
-  final _experienceLevelController = TextEditingController();
-  final _prefferedLocationController = TextEditingController();
-  final _descriptionController = TextEditingController();
+  final _companyController = TextEditingController();
   final _locationController = TextEditingController();
+  final _descriptionController = TextEditingController();
   final _expectedSalaryController = TextEditingController();
   final _applicationDataController = TextEditingController();
+  final _experienceLevelController = TextEditingController();
+  final _prefferedLocationController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -151,6 +153,12 @@ class _UploadJobScreenState extends State<UploadJobScreen> {
                       hint: "Job Description",
                       minLines: 3,
                       maxLines: 7,
+                    ),
+                    Text("Company Name"),
+                    OpenXInput(
+                      controller: _companyController,
+                      leadingIcon: Icon(LineAwesomeIcons.server_solid),
+                      hint: "Company Name",
                     ),
                     SizedBox(height: 14),
                     Text("Job Locations(Separate by Commas)"),
@@ -382,20 +390,25 @@ class _UploadJobScreenState extends State<UploadJobScreen> {
     );
   }
 
-  _uploadJobData() async {
+  Future<void> _uploadJobData() async {
     if (!(_formKey.currentState!.validate())) {
       return;
     }
-
+    final userAuth = UserAuth();
+    if (userAuth.email == null || userAuth.email!.trim().isEmpty) {
+      return;
+    }
     setState(() {
       _loading = true;
     });
     try {
       final service = JobsServices();
       await service.uploadOne(
+        email: userAuth.email ?? '',
         title: _titleController.text,
         dueDate: _dueDateController.text,
         jobType: _jobTypeController.text,
+        company: _companyController.text,
         location: _locationController.text,
         description: _descriptionController.text,
         jobCategory: _jobCategoryController.text,

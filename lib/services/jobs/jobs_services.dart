@@ -13,6 +13,8 @@ class JobsServices {
     required String location,
     required double expectedSalary,
     required String applicationData,
+    required String email,
+    required String company,
   }) async {
     try {
       final client = Supabase.instance.client;
@@ -20,7 +22,9 @@ class JobsServices {
         "title": title,
         "dueDate": dueDate,
         "jobType": jobType,
+        "company": company,
         "location": location,
+        "uploader_email": email,
         "description": description,
         "jobCategory": jobCategory,
         "expectedSalary": expectedSalary,

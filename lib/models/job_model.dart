@@ -11,9 +11,12 @@ class JobModel {
   final String applicationData;
   final String applicationType;
   final String? prefferedLocation;
+  final String? company;
+  final String uploadEmail;
 
   JobModel({
     this.date,
+    this.company,
     this.dueDate,
     this.location,
     this.expectedSalary,
@@ -21,6 +24,7 @@ class JobModel {
     this.prefferedLocation,
     required this.jobType,
     required this.jobCategory,
+    required this.uploadEmail,
     required this.description,
     required this.applicationData,
     required this.experienceLevel,
@@ -28,9 +32,11 @@ class JobModel {
   });
   factory JobModel.fromMap(Map<String, dynamic> data) {
     return JobModel(
+      uploadEmail: '',
       title: data["title"],
       dueDate: data["dueDate"],
       jobType: data["jobType"],
+      company: data['company'],
       location: data["location"],
       description: data['description'],
       jobCategory: data['jobCategory'],
@@ -55,6 +61,7 @@ List<JobModel> dummyJobs = [
     dueDate: '2024-03-15',
     location: 'San Francisco, CA',
     expectedSalary: 120000,
+    uploadEmail: '',
   ),
   JobModel(
     title: 'Marketing Manager',
@@ -67,6 +74,7 @@ List<JobModel> dummyJobs = [
     dueDate: '2024-03-22',
     location: 'New York, NY',
     expectedSalary: 150000,
+    uploadEmail: '',
   ),
   JobModel(
     title: 'Data Scientist',
@@ -79,6 +87,7 @@ List<JobModel> dummyJobs = [
     dueDate: '2024-03-01',
     location: 'Remote',
     expectedSalary: 130000,
+    uploadEmail: '',
   ),
   JobModel(
     title: 'Sales Representative',
@@ -91,6 +100,7 @@ List<JobModel> dummyJobs = [
     dueDate: '2024-02-29',
     location: 'Chicago, IL',
     expectedSalary: 80000,
+    uploadEmail: '',
   ),
   JobModel(
     title: 'Project Manager',
@@ -103,5 +113,6 @@ List<JobModel> dummyJobs = [
     dueDate: '2024-03-08',
     location: 'Austin, TX',
     expectedSalary: 110000,
+    uploadEmail: '',
   ),
 ];

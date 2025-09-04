@@ -51,6 +51,11 @@ class UserAuth {
     return user?.userMetadata?['firstName'];
   }
 
+  String? get email {
+    final user = Supabase.instance.client.auth.currentUser;
+    return user?.userMetadata?['email'];
+  }
+
   String? get lastName {
     final user = Supabase.instance.client.auth.currentUser;
     return user?.userMetadata?['lastName'];

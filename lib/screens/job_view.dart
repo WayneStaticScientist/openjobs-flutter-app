@@ -71,6 +71,17 @@ class _JobViewState extends State<JobView> {
                     SizedBox(height: 20),
                     ListTile(
                       leading: Icon(LineAwesomeIcons.calendar),
+                      title: BoldText("Company Name"),
+                      subtitle: Text(
+                        (widget.job.company == null ||
+                                widget.job.company!.trim().isEmpty)
+                            ? "No company name"
+                            : widget.job.company!,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    ListTile(
+                      leading: Icon(LineAwesomeIcons.calendar),
                       title: BoldText("Valid Until"),
                       subtitle: Text(
                         (widget.job.dueDate == null ||
@@ -84,10 +95,10 @@ class _JobViewState extends State<JobView> {
                       leading: Icon(LineAwesomeIcons.calendar),
                       title: BoldText("Preffered Locations"),
                       subtitle: Text(
-                        (widget.job.dueDate == null ||
+                        (widget.job.prefferedLocation == null ||
                                 widget.job.prefferedLocation!.trim().isEmpty)
                             ? "No Preffered Location"
-                            : widget.job.dueDate!,
+                            : widget.job.prefferedLocation!,
                       ),
                     ),
                     SizedBox(height: 20),
