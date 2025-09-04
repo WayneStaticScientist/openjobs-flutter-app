@@ -20,7 +20,6 @@ class _MainScreenState extends State<MainScreen> {
         onTap: (index) => setState(() {
           _selectedIndex = index;
         }),
-
         currentIndex: _selectedIndex,
         backgroundColor: Get.theme.scaffoldBackgroundColor,
         items: HomeNavRouter.navsItems,

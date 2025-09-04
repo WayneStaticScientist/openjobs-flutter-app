@@ -4,9 +4,11 @@ import 'package:openjobs/utils/themer_util.dart';
 
 class OpxMaterialButton extends StatelessWidget {
   final String text;
+  final bool? loading;
   final Function() onPressed;
   const OpxMaterialButton({
     super.key,
+    this.loading,
     required this.text,
     required this.onPressed,
   });
@@ -22,10 +24,14 @@ class OpxMaterialButton extends StatelessWidget {
         ),
         backgroundColor: ThemerUtil.getPaint(),
       ),
-      child: Text(
-        text,
-        style: TextStyle(color: Get.isDarkMode ? Colors.black : Colors.white),
-      ),
+      child: !(loading == true)
+          ? Text(
+              text,
+              style: TextStyle(
+                color: Get.isDarkMode ? Colors.black : Colors.white,
+              ),
+            )
+          : CircularProgressIndicator(),
     );
   }
 }

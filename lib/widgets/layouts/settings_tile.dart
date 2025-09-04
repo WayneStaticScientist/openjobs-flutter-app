@@ -7,6 +7,7 @@ class SettingsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 0,
       color: Colors.grey.withAlpha(26),
       child: Padding(padding: const EdgeInsets.all(8.0), child: child),
     );

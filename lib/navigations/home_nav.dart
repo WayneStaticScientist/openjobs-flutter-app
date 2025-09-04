@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:openjobs/models/job_model.dart';
+import 'package:openjobs/services/auth/user_auth.dart';
 import 'package:openjobs/widgets/input/opx_search_filter.dart';
 import 'package:openjobs/widgets/layouts/job_card.dart';
 
 class HomeNav extends StatelessWidget {
   const HomeNav({super.key});
-
   @override
   Widget build(BuildContext context) {
+    final userAuth = UserAuth();
     return CustomScrollView(
       slivers: [
         SliverAppBar(
           title: Text(
-            "OpenJobs",
+            userAuth.firstName ?? "OpenJobs",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
           ),
           actions: [

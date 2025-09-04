@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:openjobs/screens/upload_job.dart';
 import 'package:openjobs/widgets/layouts/item_card.dart';
 
 class UploadNav extends StatefulWidget {
@@ -36,6 +38,7 @@ class _UploadNavState extends State<UploadNav> {
             children: [
               Expanded(
                 child: ItemCard(
+                  onTap: () => Get.to(() => const UploadJobScreen()),
                   title: 'Upload Job',
                   icon: LineAwesomeIcons.plus_solid,
                 ),
