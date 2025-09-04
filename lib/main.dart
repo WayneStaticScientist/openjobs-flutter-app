@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:openjobs/controllers/jobs_controller.dart';
 import 'package:openjobs/themes/theme_data.dart';
 import 'package:openjobs/screens/main_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -24,6 +25,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'OpenJobs',
+      initialBinding: BindingsBuilder(() {
+        Get.put(JobsController());
+      }),
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: ThemeMode.system,

@@ -13,7 +13,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
-  final _jobsController = JobsController();
+  final _jobsController = Get.find<JobsController>();
   @override
   void initState() {
     super.initState();
