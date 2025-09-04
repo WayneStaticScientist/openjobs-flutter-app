@@ -37,7 +37,7 @@ class _OpenXInputState extends State<OpenXInput> {
   Widget build(BuildContext context) {
     return TextFormField(
       keyboardType: widget.keyboardType,
-      maxLines: widget.maxLines,
+      maxLines: widget.maxLines ?? 1,
       minLines: widget.minLines,
       enabled: widget.enabled ?? true,
       validator: widget.validate,
